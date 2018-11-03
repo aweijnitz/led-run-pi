@@ -1,0 +1,22 @@
+{
+  "name": "led-run-pi",
+  "version": "0.0.1",
+  "description": "1d color game. Player must reach top of LED strip, matching color with oncoming waves of LED snakes!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "1d",
+    "Raspberry",
+    "Pi",
+    "DotStar",
+    "Node.js",
+    "HC-SR04",
+    "Game",
+    "Casual",
+    "Javascript"
+  ],
+  "author": "Anders Weijnitz",
+  "license": "MIT"
+}

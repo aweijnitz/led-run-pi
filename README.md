@@ -6,11 +6,12 @@ with the color of oncoming worms, going in the opposite direction.
 ## Project status
 Just beginning. Lots of ideas. Very little to show. The usual. :-)
 
-## Needed hardware
+## Needed software and hardware
 
 - Raspberry Pi
-- HR-SR04 ultrasonic sensor
+- HC-SR04 ultrasonic sensor
 - DotStar LED Strip
+- Node.js v6 (see compatibility node below)
 
 ## Running
 
@@ -23,7 +24,7 @@ The library used to interface with the ultrasonic sensor (HC-SR04) uses a depric
 ## TODO
 
 1. Write game engine
-2. Connect HR-SR04 ultrasonic sensor
+2. Connect HC-SR04 ultrasonic sensor
 3. Buy DotStar LED Strip and connect
 4. Write display logic to render game to DotStar strip
 5. Compose levels

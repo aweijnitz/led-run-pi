@@ -1,4 +1,4 @@
-const winston = require('winston'); // Logger
+const winston = require('winston'); // https://github.com/winstonjs/winston
 const makeDir = require('make-dir');
 
 // SETUP

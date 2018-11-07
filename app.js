@@ -32,7 +32,7 @@ logger.info('Init display');
 
 
 let forever = 0;
-let mode = GAME_STARTING;
+let mode = GAME_STARTING; // TODO: Should eventually start in GAME_DEMO_LOOP
 let gameLoopId = 0;
 process.on('SIGTERM', function () {
     clearInterval(gameLoopId);
@@ -49,13 +49,13 @@ process.on('SIGINT', function () {
 
 let oldT = Date.now();
 let gameStarted = oldT;
+let gameSpeed = 1.0; // TODO: Speed factor to increase if player completes all levels and game starts over
 forever = setInterval(() => {
 
     switch (mode) {
         case GAME_OVER:
             logger.info('Game over');
             clearInterval(gameLoopId);
-            gameLoopId = 0;
             mode = GAME_DEMO_LOOP;
             break;
         case GAME_DEMO_LOOP:
@@ -63,8 +63,6 @@ forever = setInterval(() => {
         case GAME_STARTING:
             // Player started game
             // - Init world, display game begin transition, then clear screen
-            // Init World
-            //
 
             // Game Loop!
             //
@@ -85,6 +83,5 @@ forever = setInterval(() => {
         default:
             break;
     }
-
 
 }, 10);

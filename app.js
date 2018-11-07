@@ -35,11 +35,13 @@ let forever = 0;
 let mode = GAME_STARTING;
 let gameLoopId = 0;
 process.on('SIGTERM', function () {
+    clearInterval(gameLoopId);
     clearInterval(forever);
     console.log('SHUTDOWN (TERMINATED)');
     process.exit(0);
 });
 process.on('SIGINT', function () {
+    clearInterval(gameLoopId);
     clearInterval(forever);
     console.log('SHUTDOWN (INTERRUPTED)');
     process.exit(0);

@@ -1,4 +1,5 @@
 const initLogger = require('./lib/initLogger');
+const gameLoop = require('./lib/gameLoop');
 
 const GAME_RUNNING = 0;
 const GAME_STARTING = 1;
@@ -33,19 +34,20 @@ logger.info('Init display');
 let forever = 0;
 let mode = GAME_STARTING;
 let gameLoopId = 0;
-
-
 process.on('SIGTERM', function () {
     clearInterval(forever);
+    console.log('SHUTDOWN (TERMINATED)');
+    process.exit(0);
 });
-
-const gameLoop = (dt, logr) => {
-    logr.info('GAME LOOP ' + dt());
-};
+process.on('SIGINT', function () {
+    clearInterval(forever);
+    console.log('SHUTDOWN (INTERRUPTED)');
+    process.exit(0);
+});
 
 let oldT = Date.now();
 let gameStarted = oldT;
-setInterval(() => {
+forever = setInterval(() => {
 
     switch (mode) {
         case GAME_OVER:

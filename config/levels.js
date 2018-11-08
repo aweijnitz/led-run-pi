@@ -18,6 +18,4 @@ const levels = [
 ];
 
 
-module.exports.nrLevels = function nrLevels() {
-    return levels.length;
-};
+module.exports = levels;

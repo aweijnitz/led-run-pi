@@ -17,8 +17,9 @@ const conf = {
 const logger = initLogger(conf);
 
 let worldState = undefined;
-const initWorld = function initWorld(levels, gameSpeed) {
-    worldState = new World(levels, gameSpeed);
+const initWorld = function initWorld(levels, logger, gameSpeed) {
+    worldState = new World(levels, logger, gameSpeed);
+    return worldState;
 };
 
 logger.info('App starting');
@@ -28,6 +29,7 @@ logger.info('App starting');
 //
 logger.info('Init display');
 
+// TODO: Clear LED strip and set to black.
 
 // Wait for game to start (run demo mode, poll sensor)
 //
@@ -36,6 +38,7 @@ logger.info('Init display');
 let forever = 0;
 let state = GAME_STARTING; // TODO: Should eventually start in GAME_DEMO_LOOP
 let gameLoopId = 0;
+// Be nice process citizen and respect OS signals
 process.on('SIGTERM', function () {
     clearInterval(gameLoopId);
     clearInterval(forever);
@@ -51,7 +54,8 @@ process.on('SIGINT', function () {
 
 let oldT = Date.now();
 let gameStarted = oldT;
-let gameSpeed = 1.0; // TODO: Speed factor to increase if player completes all levels and game starts over
+let gameSpeed = 1.0;
+let currentLevel = 0;
 forever = setInterval(() => {
 
     switch (state) {
@@ -70,10 +74,11 @@ forever = setInterval(() => {
             // Player started game
             // - Init world, display game begin transition, then clear screen
 
-            // Game Loop!
+            // Start Game Loop!
             //
             logger.info('Starting game');
-            initWorld(levels, gameSpeed);
+            worldState = initWorld(levels, logger, gameSpeed);
+            worldState.initLevel(currentLevel);
             oldT = Date.now();
             gameLoopId = setInterval(gameLoop, conf.gameLoopDelayMs,
                 () => {
@@ -85,14 +90,16 @@ forever = setInterval(() => {
             state = GAME_RUNNING;
             break;
         case GAME_RUNNING:
-            if (Date.now() - gameStarted > 3000) // For development
+            if (Date.now() - gameStarted > 7000) { // For development
+                logger.info('Game timeout');
                 state = GAME_OVER;
+            }
 
             if (worldState.levelComplete() && (worldState.levelsRemaining() >= 1)) {
-                worldState.initLevel(worldState.nextLevel(gameSpeed));
+                currentLevel = worldState.initLevel(worldState.nextLevel(gameSpeed));
             } else if (worldState.levelComplete() && (worldState.levelsRemaining() < 1)) {
                 gameSpeed *= 0.9;
-                initWorld(levels, gameSpeed);
+                worldState = initWorld(levels, logger, gameSpeed);
             } else if (worldState.isGameOver()) {
                 state = GAME_OVER;
             }

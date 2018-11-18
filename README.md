@@ -13,9 +13,13 @@ Just beginning. Lots of ideas. Very little to show. The usual. :-)
 - DotStar LED Strip
 - Node.js v6 (see compatibility node below)
 
-## Running
+## Intalling and Running
 
-``./run.sh``
+``npm install && ./run.sh``
+
+## Run Tests
+
+``npm test``
 
 
 ## Compatibility Note - Why such old Node.js (v6)?

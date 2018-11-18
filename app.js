@@ -90,7 +90,7 @@ forever = setInterval(() => {
             state = GAME_RUNNING;
             break;
         case GAME_RUNNING:
-            if (Date.now() - gameStarted > 7000) { // For development
+            if (Date.now() - gameStarted > 17000) { // For development
                 logger.info('Game timeout');
                 state = GAME_OVER;
             }

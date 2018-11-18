@@ -13,7 +13,7 @@ const yellow = require('colors').yellow;
  * @type {Array}
  */
 const levels = [
-    new Level([new Enemy(red(), 200, 1), new Enemy(blue(), 2000, 1), new Enemy(yellow(), 4000, 1.5)]),
+    new Level([new Enemy(blue(), 200, 1), new Enemy(blue(), 2000, 1), new Enemy(yellow(), 4000, 1.5)]),
     new Level([new Enemy(green(), 200, 1), new Enemy(green(), 4000, 1), new Enemy(red(), 5000, 1)])
 ];
 

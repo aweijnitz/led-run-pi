@@ -1,5 +1,6 @@
 const initLogger = require('./lib/initLogger');
 const gameLoop = require('./lib/gameLoop');
+const renderLoop = require('./lib/renderLoop');
 const levels = require('./config/levels');
 const World = require('./lib/World').World;
 
@@ -12,7 +13,8 @@ const GAME_DEMO_LOOP = 3;
 //
 const conf = {
     logDir: './logs',
-    gameLoopDelayMs: 40 // 25 FPS
+    gameLoopDelayMs: 40, // 25 FPS state update
+    renderLoopDelayMs: 5000 // 2 FPS screen update
 };
 const logger = initLogger(conf);
 
@@ -38,6 +40,8 @@ logger.info('Init display');
 let forever = 0;
 let state = GAME_STARTING; // TODO: Should eventually start in GAME_DEMO_LOOP
 let gameLoopId = 0;
+let renderLoopId = 0;
+
 // Be nice process citizen and respect OS signals
 process.on('SIGTERM', function () {
     clearInterval(gameLoopId);
@@ -87,6 +91,7 @@ forever = setInterval(() => {
                     oldT = now;
                     return dt;
                 }, world, logger);
+            renderLoopId = setInterval(renderLoop, conf.renderLoopDelayMs, world, logger);
             state = GAME_RUNNING;
             break;
         case GAME_RUNNING:

@@ -6,18 +6,19 @@ const colors = require('../lib/colors');
 
 describe('Color matching', function () {
     describe('basic library check', function () {
-        it('should return same Hue for different red saturations', function () {
-            let baseCol = 0xff0000;
-            let gameCol = colors.red(); // 0xff2800;
+        it('should return  true for same colors', function () {
+            let c0 = colors.blue();
+            let c1 = colors.blue();
 
-
-            assert.ok(distance < 2);
-
-
+            assert.ok(colors.isSame(c0, c1));
         });
 
-        it('should return same Hue for different blue saturations', function () {
+        it('should return false for same nuance, but different names', function () {
+            let c0 = colors.red();
+            let c1 = colors.blue();
+            c1.nuance = c0.nuance;
 
+            assert.ok(!colors.isSame(c0, c1));
         });
 
     });

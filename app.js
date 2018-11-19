@@ -16,10 +16,10 @@ const conf = {
 };
 const logger = initLogger(conf);
 
-let worldState = undefined;
+let world = undefined;
 const initWorld = function initWorld(levels, logger, gameSpeed) {
-    worldState = new World(levels, logger, gameSpeed);
-    return worldState;
+    world = new World(levels, logger, gameSpeed);
+    return world;
 };
 
 logger.info('App starting');
@@ -77,8 +77,8 @@ forever = setInterval(() => {
             // Start Game Loop!
             //
             logger.info('Starting game');
-            worldState = initWorld(levels, logger, gameSpeed);
-            worldState.initLevel(currentLevel);
+            world = initWorld(levels, logger, gameSpeed);
+            world.initLevel(currentLevel);
             oldT = Date.now();
             gameLoopId = setInterval(gameLoop, conf.gameLoopDelayMs,
                 () => {
@@ -86,7 +86,7 @@ forever = setInterval(() => {
                     let dt = now - oldT;
                     oldT = now;
                     return dt;
-                }, worldState, logger);
+                }, world, logger);
             state = GAME_RUNNING;
             break;
         case GAME_RUNNING:
@@ -95,12 +95,12 @@ forever = setInterval(() => {
                 state = GAME_OVER;
             }
 
-            if (worldState.levelComplete() && (worldState.levelsRemaining() >= 1)) {
-                currentLevel = worldState.initLevel(worldState.nextLevel(gameSpeed));
-            } else if (worldState.levelComplete() && (worldState.levelsRemaining() < 1)) {
+            if (world.isLevelComplete() && (world.levelsRemaining() >= 1)) {
+                currentLevel = world.initLevel(world.nextLevel(gameSpeed));
+            } else if (world.isLevelComplete() && (world.levelsRemaining() < 1)) {
                 gameSpeed *= 0.9;
-                worldState = initWorld(levels, logger, gameSpeed);
-            } else if (worldState.isGameOver()) {
+                world = initWorld(levels, logger, gameSpeed);
+            } else if (world.isGameOver()) {
                 state = GAME_OVER;
             }
             break;

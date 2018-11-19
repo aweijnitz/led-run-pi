@@ -97,6 +97,8 @@ forever = setInterval(() => {
         case GAME_RUNNING:
             if (Date.now() - gameStarted > 17000) { // For development
                 logger.info('Game timeout');
+                clearInterval(renderLoopId);
+                clearInterval(gameLoopId);
                 state = GAME_OVER;
             }
 
@@ -106,6 +108,8 @@ forever = setInterval(() => {
                 gameSpeed *= 0.9;
                 world = initWorld(levels, logger, gameSpeed);
             } else if (world.isGameOver()) {
+                clearInterval(gameLoopId);
+                clearInterval(renderLoopId);
                 state = GAME_OVER;
             }
             break;

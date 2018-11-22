@@ -14,7 +14,7 @@ const GAME_DEMO_LOOP = 3;
 const conf = {
     logDir: './logs',
     gameLoopDelayMs: 40, // 25 FPS state update
-    renderLoopDelayMs: 5000 // 2 FPS screen update
+    renderLoopDelayMs: 500 // 2 FPS screen update
 };
 const logger = initLogger(conf);
 
@@ -40,6 +40,7 @@ logger.info('Init display');
 let forever = 0;
 let state = GAME_STARTING; // TODO: Should eventually start in GAME_DEMO_LOOP
 let gameLoopId = 0;
+let demoLoopId = 0;
 let renderLoopId = 0;
 
 // Be nice process citizen and respect OS signals
@@ -67,9 +68,19 @@ forever = setInterval(() => {
             logger.info('Game over');
             gameSpeed = 1.0;
             clearInterval(gameLoopId);
+            clearInterval(renderLoopId);
+
             // TODO: Display game over transition, then switch state to demo loop
             logger.info('Starting demo loop');
             oldT = Date.now();
+            demoLoopId = setInterval(gameLoop, conf.gameLoopDelayMs,
+                () => {
+                    let now = Date.now();
+                    let dt = now - oldT;
+                    oldT = now;
+                    return dt;
+                }, world, logger);
+            renderLoopId = setInterval(renderLoop, conf.renderLoopDelayMs, world, logger);
             state = GAME_DEMO_LOOP;
             break;
         case GAME_DEMO_LOOP:

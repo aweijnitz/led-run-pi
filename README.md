@@ -27,9 +27,10 @@ The library used to interface with the ultrasonic sensor (HC-SR04) uses a depric
 
 ## TODO
 
-1. Write game engine
-2. Connect HC-SR04 ultrasonic sensor
-3. Buy DotStar LED Strip and connect
+1. Write game engine, (__DONE__)
+2. Connect HC-SR04 ultrasonic sensor (__PoC__ working outside this repo)
+3. Buy [DotStar LED Strip](https://www.adafruit.com/product/2242) (__DONE__ *Black friday hooray!*)
+4. Connect DotStar LED Strip
 4. Write display logic to render game to DotStar strip
 5. Compose levels
 6. Tweak difficulty

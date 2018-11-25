@@ -1,9 +1,9 @@
 const Enemy = require('../lib/Enemy');
 const Level = require('../lib/Level');
-const red = require('colors').red;
-const blue = require('colors').blue;
-const green = require('colors').green;
-const yellow = require('colors').yellow;
+const red = require('../lib/colors').red;
+const blue = require('../lib/colors').blue;
+const green = require('../lib/colors').green;
+const yellow = require('../lib/colors').yellow;
 
 let currentId = 0;
 

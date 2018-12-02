@@ -13,13 +13,32 @@ Just beginning. Lots of ideas. Very little to show. The usual. :-)
 - DotStar LED Strip
 - Node.js v6 (see compatibility node below)
 
-## Intalling and Running
+## Installing and Running
 
-``npm install && ./run.sh``
+``./install-Pi-specific-libs.sh && npm install && ./run.sh``
 
 ## Run Tests
 
 ``npm test``
+
+## Connecting the peripherials
+
+
+### DotStar LED strip
+
+Via a level-shifter, connect the **DotStar DAT to Pi GPIO 10** and
+the **DotStar CLK to Pi GPIO 11**.
+
+For details, see [The Adafruit instruction](https://learn.adafruit.com/dotstar-pi-painter/assembly-part-1).
+
+Note, you need to hook up a quite beefy power brick to power the LED strp, at least 10A will be needed to handle the 
+power draw of a lot of pixels firing at the same time. 
+
+### Ultrasonic sensor
+
+Hook up the **senor ECHO pin to Pi GPIO17** and **sensor TRIGGER pin to Pi GPIO04**.
+
+If those are not free, use other pins and set the corresponding pin numbers in ```./config/GPIO-pins.js```.
 
 
 ## Compatibility Note - Why such old Node.js (v6)?

@@ -1,0 +1,1 @@
+rsync -avz --exclude={node_modules,.idea,.git,syncToPi.sh} ./ pi@192.168.178.37:/home/pi/projects/led-run-pi/

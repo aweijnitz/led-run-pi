@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-npm install pigpio node-spi dotstar
+npm install pigpio pi-spi dotstar

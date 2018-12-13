@@ -31,8 +31,19 @@ the **DotStar CLK to Pi GPIO 11**.
 
 For details, see [The Adafruit instruction](https://learn.adafruit.com/dotstar-pi-painter/assembly-part-1).
 
-Note, you need to hook up a quite beefy power brick to power the LED strp, at least 10A will be needed to handle the 
-power draw of a lot of pixels firing at the same time. 
+Note, you need to hook up a quite beefy power brick to power the LED strip, at least 10A will be needed to handle the 
+power draw of a lot of pixels firing at the same time. I ended up ordering a 5V, 15A brick. Should cover most scenarios.
+
+### Enable SPI on the Pi3
+
+In /boot/config.txt, uncommend the dtparam line to enable spi, like so:
+
+```
+# Uncomment some or all of these to enable the optional hardware interfaces
+#dtparam=i2c_arm=on
+#dtparam=i2s=on
+dtparam=spi=on
+```
 
 ### Ultrasonic sensor
 
@@ -41,7 +52,7 @@ Hook up the **senor ECHO pin to Pi GPIO17** and **sensor TRIGGER pin to Pi GPIO0
 If those are not free, use other pins and set the corresponding pin numbers in ```./config/GPIO-pins.js```.
 
 
-## Compatibility Note - Why such old Node.js (v6)?
+## Compatibility Note - Why such old Node.js (v8)?
 The library used to interface with the ultrasonic sensor (HC-SR04) uses a depricated API and was not functioning properly with the latest Node.js for me.
 
 ## TODO

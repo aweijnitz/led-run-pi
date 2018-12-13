@@ -13,8 +13,8 @@ const GAME_DEMO_LOOP = 3;
 //
 const conf = {
     logDir: './logs',
-    gameLoopDelayMs: 40, // 25 FPS state update
-    renderLoopDelayMs: 500 // 2 FPS screen update
+    gameLoopDelayMs: 1000/40, // 40 Hz
+    renderLoopDelayMs: 1000/50 // 60 FPS
 };
 const logger = initLogger(conf);
 
@@ -122,4 +122,4 @@ forever = setInterval(() => {
             break;
     }
 
-}, 10);
+}, 5);

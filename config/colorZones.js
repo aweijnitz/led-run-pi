@@ -4,22 +4,22 @@ const colors = require('../lib/colors');
 const zones = [
     {
         color: colors.red(),
-        min: 10,
-        max: 30
+        min: 5,
+        max: 10
     },
     {
         color: colors.green(),
-        min: 31,
-        max: 50
+        min: 11,
+        max: 20
     },
     {
         color: colors.blue(),
-        min: 51,
-        max: 70
+        min: 22,
+        max: 35
     },
     {
         color: colors.yellow(),
-        min: 71,
+        min: 36,
         max: 90
     },
 ];

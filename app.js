@@ -1,7 +1,7 @@
 const initLogger = require('./lib/initLogger');
 const gameLoop = require('./lib/gameLoop');
 const renderLoop = require('./lib/renderLoop');
-//const demoLoop = require('./lib/demoLoop');
+const demoLoop = require('./lib/demoLoop');
 
 const levels = require('./config/levels');
 const World = require('./lib/World').World;

@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-const colors = require('../lib/colors');
+const colors = require('../lib/color-utils');
 
 
 

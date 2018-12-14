@@ -91,7 +91,7 @@ forever = setInterval(() => {
 
             // Start Game Loop!
             //
-            logger.info('Starting game');
+            logger.info('Starting game. LEVEL: ' + currentLevel);
             world = initWorld(levels, logger, gameSpeed);
             world.initLevel(currentLevel);
             oldT = Date.now();
@@ -102,6 +102,7 @@ forever = setInterval(() => {
                     oldT = now;
                     return dt;
                 }, world, logger);
+            clearInterval(renderLoopId); // Kill demo loop
             renderLoopId = setInterval(renderLoop, conf.renderLoopDelayMs, world, logger);
             state = GAME_RUNNING;
             break;
@@ -109,9 +110,14 @@ forever = setInterval(() => {
 
             if (world.isLevelComplete() && (world.levelsRemaining() >= 1)) {
                 currentLevel = world.initLevel(world.nextLevel(gameSpeed));
+                logger.info('Next Level! LEVEL: ' + currentLevel);
             } else if (world.isLevelComplete() && (world.levelsRemaining() < 1)) {
                 gameSpeed *= 0.9;
-                world = initWorld(levels, logger, gameSpeed);
+                currentLevel = 0;
+                //world = initWorld(levels, logger, gameSpeed);
+                world.reset();
+                world.initLevel(currentLevel, gameSpeed);
+                logger.info('ALL LEVELS COMPLETED! Speed up! LEVEL: ' + currentLevel);
             } else if (world.isGameOver()) {
                 clearInterval(gameLoopId);
                 clearInterval(renderLoopId);

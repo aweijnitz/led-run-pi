@@ -18,10 +18,15 @@ const nextId = () => {
  * @type {Array}
  */
 const levels = [
-    new Level([new Enemy(yellow(), 200, nextId())]),
-    new Level([new Enemy(blue(), 200, nextId()), new Enemy(blue(), 2000, nextId()), new Enemy(yellow(), 4000, nextId())]),
-    new Level([new Enemy(green(), 200, nextId()), new Enemy(green(), 4000, nextId()), new Enemy(red(), 5000, nextId())])
+    new Level([new Enemy(yellow(), 100, nextId())]),
+    new Level([new Enemy(yellow(), 100, nextId()), new Enemy(red(), 6000, nextId())]),
+    new Level([new Enemy(blue(), 200, nextId()), new Enemy(blue(), 2000, nextId()), new Enemy(yellow(), 5500, nextId())])
 ];
 
+/*
+
+,
+    new Level([new Enemy(green(), 200, nextId()), new Enemy(green(), 4000, nextId()), new Enemy(red(), 7000, nextId())])
+ */
 
 module.exports = levels;

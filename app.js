@@ -77,8 +77,9 @@ let startT = Date.now();
 let gameStarted = oldT;
 let gameSpeed = 1.0;
 let currentLevel = 0;
-let startGameTriggerTimout = 5*1000;
+let startGameTriggerTimout = 3*1000;
 let isTrackingGameTrigger = false;
+let startGameTriggerDist = 5;
 
 forever = setInterval(() => {
 
@@ -96,6 +97,7 @@ forever = setInterval(() => {
             break;
         case GAME_DEMO_LOOP_STARTING:
             logger.info('Starting demo loop');
+            /*
             oldT = Date.now();
             startT = Date.now();
             demoLoopId = setInterval(demoLoop, conf.gameLoopDelayMs,
@@ -105,18 +107,18 @@ forever = setInterval(() => {
                     oldT = now;
                     return { dt: dt, startT: startT };
                 }, logger);
-            //renderLoopId = setInterval(renderLoop, conf.renderLoopDelayMs, world, logger);
+                */
             state = GAME_DEMO_LOOP;
             break;
         case GAME_DEMO_LOOP:
-            // CHeck for game start
+            // Check for game start (track hand at below 3cm from sensor for 5s)
             let dist = controller.getCurrentDistance();
-            if(dist < 3 && !isTrackingGameTrigger) {
+            if(dist < startGameTriggerDist && !isTrackingGameTrigger) {
                 isTrackingGameTrigger = true;
                 startT = Date.now();
-            } else if (dist > 3 && isTrackingGameTrigger && Date.now() < (startT + startGameTriggerTimout)) {
+            } else if (dist > startGameTriggerDist && isTrackingGameTrigger && Date.now() < (startT + startGameTriggerTimout)) {
                 isTrackingGameTrigger = false;
-            } else if (dist < 3 && isTrackingGameTrigger && Date.now() >= (startT + startGameTriggerTimout)) {
+            } else if (dist < startGameTriggerDist && isTrackingGameTrigger && Date.now() >= (startT + startGameTriggerTimout)) {
                 isTrackingGameTrigger = false;
                 clearInterval(demoLoopId);
                 state = GAME_STARTING;
@@ -141,7 +143,7 @@ forever = setInterval(() => {
                     oldT = now;
                     return dt;
                 }, world, controller, logger);
-            clearInterval(renderLoopId); // Kill demo loop
+            clearInterval(demoLoopId); // Kill demo loop
             renderLoopId = setInterval(renderLoop, conf.renderLoopDelayMs, world, logger);
             state = GAME_RUNNING;
             break;

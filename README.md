@@ -4,7 +4,7 @@ Guide a small worm to the other end of the LED strip by matching its color
 with the color of oncoming worms, going in the opposite direction.
 
 ## Project status
-Just beginning. Lots of ideas. Very little to show. The usual. :-)
+Basic gameplay in place. Needs a lot of polishing and some good refactoring. :-)
 
 ## Needed software and hardware
 
@@ -14,6 +14,8 @@ Just beginning. Lots of ideas. Very little to show. The usual. :-)
 - Node.js v6 (see compatibility node below)
 
 ## Installing and Running
+
+_Developed on a Raspberry Pi 3, Model B_
 
 ``./install-Pi-specific-libs.sh && npm install && ./run.sh``
 
